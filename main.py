@@ -1,16 +1,16 @@
-import os
+#import os
 import numpy as np
 import tensorflow as tf
 from flask import Flask, jsonify, render_template, request
 
 NUMBER_ROUND = 9
 
-pwd = os.getcwd()
-imagePath = pwd + '/data/flower_photos/daisy/21652746_cc379e0eea_m.jpg'
+#pwd = os.getcwd()
+#imagePath = pwd + '/data/flower_photos/daisy/21652746_cc379e0eea_m.jpg'
 #imagePath = 'http://www.kvhealthcare.org/Assets/Images/Quality/daisy/daisy.jpg'
 #imagePath = 'http://www.woodenshoe.com/media/attila-graffiti-tulip.jpg'
-modelFullPath = pwd + '/data/output_graph.pb'
-labelsFullPath = pwd + '/data/output_labels.txt'
+#modelFullPath = pwd + '/data/output_graph.pb'
+#labelsFullPath = pwd + '/data/output_labels.txt'
 
 
 def create_graph():
