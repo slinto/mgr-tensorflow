@@ -83,9 +83,9 @@ def photoAnalyze():
 
 @app.route('/')
 def main():
-    answer = run_inference_on_image()
-    print(answer)
-    return render_template('index.html', answer=answer)
+    #answer = run_inference_on_image()
+    #print(answer)
+    return render_template('index.html')
 
 app.run()
 
