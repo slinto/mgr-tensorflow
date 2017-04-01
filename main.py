@@ -1,12 +1,13 @@
 import os
 import numpy as np
+from six.moves import urllib
 import tensorflow as tf
 from flask import Flask, jsonify, render_template, request
 
 NUMBER_ROUND = 9
 
 pwd = os.getcwd()
-imagePath = pwd + '/data/flower_photos/daisy/21652746_cc379e0eea_m.jpg'
+#imagePath = pwd + '/data/flower_photos/daisy/21652746_cc379e0eea_m.jpg'
 #imagePath = 'http://www.kvhealthcare.org/Assets/Images/Quality/daisy/daisy.jpg'
 #imagePath = 'http://www.woodenshoe.com/media/attila-graffiti-tulip.jpg'
 modelFullPath = pwd + '/data/output_graph.pb'
@@ -24,12 +25,16 @@ def create_graph():
 
 def run_inference_on_image():
     answer = None
+    image_url = 'http://www.woodenshoe.com/media/attila-graffiti-tulip.jpg'
+    req = urllib.request.Request(image_url)
+    response = urllib.request.urlopen(req)
+    image_data = response.read()
 
-    if not tf.gfile.Exists(imagePath):
-        tf.logging.fatal('File does not exist %s', imagePath)
-        return answer
+    # if not tf.gfile.Exists(imagePath):
+    #     tf.logging.fatal('File does not exist %s', imagePath)
+    #     return answer
 
-    image_data = tf.gfile.FastGFile(imagePath, 'rb').read()
+    # image_data = tf.gfile.FastGFile(imagePath, 'rb').read()
 
     # Creates graph from saved GraphDef.
     create_graph()
@@ -63,15 +68,15 @@ def getNormalizedNumber(x):
     return round(float(x), NUMBER_ROUND)
 
 def getNormalizedString(s):
-    return s[2:-3]
+    return s
+    #return s[2:-3]
 
 ## WEB_APP
 app = Flask(__name__)
 
-@app.route('/api/photoAnalyze')
+@app.route('/api/photo-prediction')
 def photoAnalyze():
     answer = run_inference_on_image()
-    print(answer[0])
     list = [
         {'name': getNormalizedString(answer[0][0]), 'value': getNormalizedNumber(answer[0][1])},
         {'name': getNormalizedString(answer[1][0]), 'value': getNormalizedNumber(answer[1][1])},
