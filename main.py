@@ -76,7 +76,7 @@ def getNormalizedString(s):
 app = Flask(__name__)
 
 @app.route('/api/photo-prediction', methods=['GET', 'POST'])
-def photoAnalyze():
+def photoPrediction():
     print(request.form['image_data'])
     if request.method == 'POST':
         answer = run_inference_on_image(request.form['image_data'])
@@ -92,9 +92,10 @@ def photoAnalyze():
     ]
     return jsonify(status='OK', results=list)
 
-@app.route('/api/photo-prediction-mock', methods=['GET', 'POST'])
-def photoAnalyze():
-    print(request.form['image_data'])
+@app.route('/api/photo-prediction-mock', methods=['GET'])
+def photoPredictionMock():
+    if request.method == 'POST':
+        print(request.form['image_data'])
 
     list = [
         {'name': 'prunus-serrulata', 'value': 0.99},
