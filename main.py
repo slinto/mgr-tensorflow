@@ -23,9 +23,9 @@ def create_graph():
         _ = tf.import_graph_def(graph_def, name='')
 
 
-def run_inference_on_image():
+def run_inference_on_image(image_url):
     answer = None
-    image_url = 'http://www.woodenshoe.com/media/attila-graffiti-tulip.jpg'
+
     req = urllib.request.Request(image_url)
     response = urllib.request.urlopen(req)
     image_data = response.read()
@@ -74,9 +74,14 @@ def getNormalizedString(s):
 ## WEB_APP
 app = Flask(__name__)
 
-@app.route('/api/photo-prediction')
+@app.route('/api/photo-prediction', methods=['GET', 'POST'])
 def photoAnalyze():
-    answer = run_inference_on_image()
+    print(request.form['image_data'])
+    if request.method == 'POST':
+        answer = run_inference_on_image(request.form['image_data'])
+    elif request.method == 'GET':
+        answer = run_inference_on_image('http://www.woodenshoe.com/media/attila-graffiti-tulip.jpg')
+
     list = [
         {'name': getNormalizedString(answer[0][0]), 'value': getNormalizedNumber(answer[0][1])},
         {'name': getNormalizedString(answer[1][0]), 'value': getNormalizedNumber(answer[1][1])},
@@ -85,6 +90,7 @@ def photoAnalyze():
         {'name': getNormalizedString(answer[4][0]), 'value': getNormalizedNumber(answer[4][1])},
     ]
     return jsonify(status='OK', results=list)
+
 
 @app.route('/')
 def main():
