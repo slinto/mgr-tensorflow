@@ -61,7 +61,8 @@ def run_inference_on_image(image_url):
             print('%s (score = %.5f)' % (human_string, score))
 
         answer = labels[top_k[0]]
-
+        print('answer')
+        print(answer)
         return results
 
 def getNormalizedNumber(x):
@@ -91,6 +92,18 @@ def photoAnalyze():
     ]
     return jsonify(status='OK', results=list)
 
+@app.route('/api/photo-prediction-mock', methods=['GET', 'POST'])
+def photoAnalyze():
+    print(request.form['image_data'])
+
+    list = [
+        {'name': 'prunus-serrulata', 'value': 0.99},
+        {'name': 'salix-urbalix', 'value': 0.21},
+        {'name': 'item-3', 'value': 0.03},
+        {'name': 'item-4', 'value': 0.02},
+        {'name': 'item-5', 'value': 0.01},
+    ]
+    return jsonify(status='OK', results=list)
 
 @app.route('/')
 def main():
