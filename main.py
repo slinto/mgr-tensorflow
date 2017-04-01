@@ -5,12 +5,12 @@ from flask import Flask, jsonify, render_template, request
 
 NUMBER_ROUND = 9
 
-#pwd = os.getcwd()
-#imagePath = pwd + '/data/flower_photos/daisy/21652746_cc379e0eea_m.jpg'
+pwd = os.getcwd()
+imagePath = pwd + '/data/flower_photos/daisy/21652746_cc379e0eea_m.jpg'
 #imagePath = 'http://www.kvhealthcare.org/Assets/Images/Quality/daisy/daisy.jpg'
 #imagePath = 'http://www.woodenshoe.com/media/attila-graffiti-tulip.jpg'
-#modelFullPath = pwd + '/data/output_graph.pb'
-#labelsFullPath = pwd + '/data/output_labels.txt'
+modelFullPath = pwd + '/data/output_graph.pb'
+labelsFullPath = pwd + '/data/output_labels.txt'
 
 
 def create_graph():
@@ -83,8 +83,6 @@ def photoAnalyze():
 
 @app.route('/')
 def main():
-    #answer = run_inference_on_image()
-    #print(answer)
     return render_template('index.html')
 
 if __name__ == '__main__':
