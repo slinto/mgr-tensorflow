@@ -1,4 +1,4 @@
-#import os
+import os
 import numpy as np
 import tensorflow as tf
 from flask import Flask, jsonify, render_template, request
