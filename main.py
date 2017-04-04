@@ -92,7 +92,7 @@ def photoPrediction():
     ]
     return jsonify(status='OK', results=list)
 
-@app.route('/api/photo-prediction-mock', methods=['GET'])
+@app.route('/api/photo-prediction-mock', methods=['GET', 'POST'])
 def photoPredictionMock():
     if request.method == 'POST':
         print(request.form['image_data'])
