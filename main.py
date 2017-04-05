@@ -84,11 +84,11 @@ def photoPrediction():
         answer = run_inference_on_image('http://www.woodenshoe.com/media/attila-graffiti-tulip.jpg')
 
     list = [
-        {'name': getNormalizedString(answer[0][0]), 'value': getNormalizedNumber(answer[0][1])},
-        {'name': getNormalizedString(answer[1][0]), 'value': getNormalizedNumber(answer[1][1])},
-        {'name': getNormalizedString(answer[2][0]), 'value': getNormalizedNumber(answer[2][1])},
-        {'name': getNormalizedString(answer[3][0]), 'value': getNormalizedNumber(answer[3][1])},
-        {'name': getNormalizedString(answer[4][0]), 'value': getNormalizedNumber(answer[4][1])},
+        {'id': getNormalizedString(answer[0][0]), 'value': getNormalizedNumber(answer[0][1])},
+        {'id': getNormalizedString(answer[1][0]), 'value': getNormalizedNumber(answer[1][1])},
+        {'id': getNormalizedString(answer[2][0]), 'value': getNormalizedNumber(answer[2][1])},
+        {'id': getNormalizedString(answer[3][0]), 'value': getNormalizedNumber(answer[3][1])},
+        {'id': getNormalizedString(answer[4][0]), 'value': getNormalizedNumber(answer[4][1])},
     ]
     return jsonify(status='OK', results=list)
 
@@ -98,11 +98,11 @@ def photoPredictionMock():
         print(request.form['image_data'])
 
     list = [
-        {'name': 'prunus-serrulata', 'value': 0.99},
-        {'name': 'salix-urbalix', 'value': 0.21},
-        {'name': 'item-3', 'value': 0.03},
-        {'name': 'item-4', 'value': 0.02},
-        {'name': 'item-5', 'value': 0.01},
+        {'id': 'prunus-serrulata', 'value': 0.99},
+        {'id': 'salix-urbalix', 'value': 0.21},
+        {'id': 'item-3', 'value': 0.03},
+        {'id': 'item-4', 'value': 0.02},
+        {'id': 'item-5', 'value': 0.01},
     ]
     return jsonify(status='OK', results=list)
 
