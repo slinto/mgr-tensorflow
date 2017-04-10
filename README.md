@@ -1,7 +1,6 @@
 # mgr-tensorflow
 Tensorflow python API
 
-
 ## Development
 ```
 export FLASK_APP=main.py

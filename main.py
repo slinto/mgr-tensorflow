@@ -7,16 +7,11 @@ from flask import Flask, jsonify, render_template, request
 NUMBER_ROUND = 9
 
 pwd = os.getcwd()
-#imagePath = pwd + '/data/flower_photos/daisy/21652746_cc379e0eea_m.jpg'
-#imagePath = 'http://www.kvhealthcare.org/Assets/Images/Quality/daisy/daisy.jpg'
-#imagePath = 'http://www.woodenshoe.com/media/attila-graffiti-tulip.jpg'
 modelFullPath = pwd + '/data/output_graph.pb'
 labelsFullPath = pwd + '/data/output_labels.txt'
 
 
 def create_graph():
-    """Creates a graph from saved GraphDef file and returns a saver."""
-    # Creates graph from saved graph_def.pb.
     with tf.gfile.FastGFile(modelFullPath, 'rb') as f:
         graph_def = tf.GraphDef()
         graph_def.ParseFromString(f.read())
@@ -24,29 +19,22 @@ def create_graph():
 
 
 def run_inference_on_image(image_url):
-    answer = None
-
+    # load image from url
     req = urllib.request.Request(image_url)
     response = urllib.request.urlopen(req)
     image_data = response.read()
-
-    # if not tf.gfile.Exists(imagePath):
-    #     tf.logging.fatal('File does not exist %s', imagePath)
-    #     return answer
-
-    # image_data = tf.gfile.FastGFile(imagePath, 'rb').read()
 
     # Creates graph from saved GraphDef.
     create_graph()
 
     with tf.Session() as sess:
-
         softmax_tensor = sess.graph.get_tensor_by_name('final_result:0')
         predictions = sess.run(softmax_tensor,
                                {'DecodeJpeg/contents:0': image_data})
         predictions = np.squeeze(predictions)
 
-        top_k = predictions.argsort()[-5:][::-1]  # Getting top 5 predictions
+        # get top 5 predictions
+        top_k = predictions.argsort()[-5:][::-1]
         f = open(labelsFullPath, 'rb')
         lines = f.readlines()
         labels = [str(w).replace("\n", "") for w in lines]
@@ -60,9 +48,6 @@ def run_inference_on_image(image_url):
             results.append([human_string, score])
             print('%s (score = %.5f)' % (human_string, score))
 
-        answer = labels[top_k[0]]
-        print('answer')
-        print(answer)
         return results
 
 def getNormalizedNumber(x):
@@ -70,9 +55,9 @@ def getNormalizedNumber(x):
 
 def getNormalizedString(s):
     return s
-    #return s[2:-3]
 
-## WEB_APP
+
+# HTTP API
 app = Flask(__name__)
 
 @app.route('/api/photo-prediction', methods=['GET', 'POST'])
