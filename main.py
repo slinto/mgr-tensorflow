@@ -4,15 +4,14 @@ from six.moves import urllib
 import tensorflow as tf
 from flask import Flask, jsonify, render_template, request
 
-NUMBER_ROUND = 9
-
 pwd = os.getcwd()
-modelFullPath = pwd + '/data/output_graph.pb'
-labelsFullPath = pwd + '/data/output_labels.txt'
 
+DECIMAL_LENGTH = 9
+MODEL_PATH = pwd + '/data/output_graph.pb'
+LABELS_PATH = pwd + '/data/output_labels.txt'
 
 def create_graph():
-    with tf.gfile.FastGFile(modelFullPath, 'rb') as f:
+    with tf.gfile.FastGFile(MODEL_PATH, 'rb') as f:
         graph_def = tf.GraphDef()
         graph_def.ParseFromString(f.read())
         _ = tf.import_graph_def(graph_def, name='')
@@ -35,7 +34,7 @@ def run_inference_on_image(image_url):
 
         # get top 5 predictions
         top_k = predictions.argsort()[-5:][::-1]
-        f = open(labelsFullPath, 'rb')
+        f = open(LABELS_PATH, 'rb')
         lines = f.readlines()
         labels = [str(w).replace("\n", "") for w in lines]
 
@@ -51,7 +50,7 @@ def run_inference_on_image(image_url):
         return results
 
 def getNormalizedNumber(x):
-    return round(float(x), NUMBER_ROUND)
+    return round(float(x), DECIMAL_LENGTH)
 
 def getNormalizedString(s):
     return s
