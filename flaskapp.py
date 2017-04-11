@@ -57,6 +57,7 @@ def getNormalizedString(s):
 
 # HTTP API
 app = Flask(__name__)
+app.config['LOG_FILE'] = '/var/log/flaskapp/application.log'
 
 @app.route('/api/photo-prediction', methods=['GET', 'POST'])
 def photoPrediction():
