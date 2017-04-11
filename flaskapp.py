@@ -16,7 +16,6 @@ def create_graph():
         graph_def.ParseFromString(f.read())
         _ = tf.import_graph_def(graph_def, name='')
 
-
 def run_inference_on_image(image_url):
     # load image from url
     req = urllib.request.Request(image_url)
