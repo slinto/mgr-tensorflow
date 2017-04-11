@@ -13,7 +13,19 @@ flask run
 git push heroku master
 ```
 
+## Server install
+http://www.datasciencebytes.com/bytes/2015/02/24/running-a-flask-app-on-aws-ec2/
+```
+cd flaskapp/
+git pull origin master
+sudo pip install -r requirements.txt
+sudo apachectl restart
+```
 
+Test tensorflow version
+```
+python -c 'import tensorflow as tf; print(tf.__version__)'
+```
 ## API Methods
 #### Server
 https://slinto-mgr-tensorflow.herokuapp.com/

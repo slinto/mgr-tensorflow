@@ -60,8 +60,8 @@ app = Flask(__name__)
 
 @app.route('/api/photo-prediction', methods=['GET', 'POST'])
 def photoPrediction():
-    print(request.form['image_data'])
     if request.method == 'POST':
+        print(request.form['image_data'])
         answer = run_inference_on_image(request.form['image_data'])
     elif request.method == 'GET':
         answer = run_inference_on_image('http://www.woodenshoe.com/media/attila-graffiti-tulip.jpg')
@@ -74,6 +74,7 @@ def photoPrediction():
         {'id': getNormalizedString(answer[4][0]), 'value': getNormalizedNumber(answer[4][1])},
     ]
     return jsonify(status='OK', results=list)
+
 
 @app.route('/api/photo-prediction-mock', methods=['GET', 'POST'])
 def photoPredictionMock():
