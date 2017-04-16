@@ -27,12 +27,24 @@ Test tensorflow version
 ```
 python -c 'import tensorflow as tf; print(tf.__version__)'
 ```
+
+## Server logs (linux)
+#### ERROR_LOGS
+```
+tail -f /var/log/apache2/error.log
+```
+
+#### APP_LOGS
+```
+tail -f /var/log/apache2/access.log
+```
+
 ## API Methods
 #### Server
-https://slinto-mgr-tensorflow.herokuapp.com/
+http://ec2-35-157-132-97.eu-central-1.compute.amazonaws.com/
 
 #### [GET, POST] /api/photo-prediction
-https://slinto-mgr-tensorflow.herokuapp.com/api/photo-prediction
+http://ec2-35-157-132-97.eu-central-1.compute.amazonaws.com//api/photo-prediction
 
 #### [GET, POST] /api/photo-prediction-mock
-https://slinto-mgr-tensorflow.herokuapp.com/api/photo-prediction-mock
+http://ec2-35-157-132-97.eu-central-1.compute.amazonaws.com//api/photo-prediction-mock
