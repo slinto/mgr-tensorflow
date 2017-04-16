@@ -1,10 +1,11 @@
 import os
+from sys import platform as _platform
 import numpy as np
 from six.moves import urllib
 import tensorflow as tf
 from flask import Flask, jsonify, render_template, request
 
-if int(os.environ['IS_SERVER']):
+if _platform == "linux" or _platform == "linux2":
     pwd = '/var/www/html/flaskapp'
 else:
     pwd = os.getcwd()
@@ -13,11 +14,13 @@ PREDICTION_DECIMAL_LENGTH = 9
 MODEL_PATH = pwd + '/data/output_graph.pb'
 LABELS_PATH = pwd + '/data/output_labels.txt'
 
+
 def create_graph():
     with tf.gfile.FastGFile(MODEL_PATH, 'rb') as f:
         graph_def = tf.GraphDef()
         graph_def.ParseFromString(f.read())
         _ = tf.import_graph_def(graph_def, name='')
+
 
 def run_inference_on_image(image_url):
     # load image from url
@@ -51,8 +54,10 @@ def run_inference_on_image(image_url):
 
         return results
 
+
 def getNormalizedNumber(x):
     return round(float(x), PREDICTION_DECIMAL_LENGTH)
+
 
 def getNormalizedString(s):
     return s
@@ -61,6 +66,7 @@ def getNormalizedString(s):
 # HTTP API
 app = Flask(__name__)
 app.config['LOG_FILE'] = '/var/log/flaskapp/application.log'
+
 
 @app.route('/api/photo-prediction', methods=['GET', 'POST'])
 def photoPrediction():
@@ -94,9 +100,11 @@ def photoPredictionMock():
     ]
     return jsonify(status='OK', results=list)
 
+
 @app.route('/')
 def main():
     return render_template('index.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
