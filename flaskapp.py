@@ -4,9 +4,12 @@ from six.moves import urllib
 import tensorflow as tf
 from flask import Flask, jsonify, render_template, request
 
-pwd = os.getcwd()
+if int(os.environ['IS_SERVER']):
+    pwd = '/var/www/html/flaskapp'
+else:
+    pwd = os.getcwd()
 
-DECIMAL_LENGTH = 9
+PREDICTION_DECIMAL_LENGTH = 9
 MODEL_PATH = pwd + '/data/output_graph.pb'
 LABELS_PATH = pwd + '/data/output_labels.txt'
 
@@ -49,7 +52,7 @@ def run_inference_on_image(image_url):
         return results
 
 def getNormalizedNumber(x):
-    return round(float(x), DECIMAL_LENGTH)
+    return round(float(x), PREDICTION_DECIMAL_LENGTH)
 
 def getNormalizedString(s):
     return s

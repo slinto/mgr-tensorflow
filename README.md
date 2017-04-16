@@ -4,6 +4,7 @@ Tensorflow python API
 ## Development
 ```
 export FLASK_APP=flaskapp.py
+export IS_SERVER=0
 export FLASK_DEBUG=1
 flask run
 ```
