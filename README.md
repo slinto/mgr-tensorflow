@@ -43,7 +43,14 @@ tail -f /var/log/apache2/access.log
 http://ec2-35-157-132-97.eu-central-1.compute.amazonaws.com/
 
 #### [GET, POST] /api/photo-prediction
-http://ec2-35-157-132-97.eu-central-1.compute.amazonaws.com//api/photo-prediction
+http://ec2-35-157-132-97.eu-central-1.compute.amazonaws.com/api/photo-prediction
 
-#### [GET, POST] /api/photo-prediction-mock
-http://ec2-35-157-132-97.eu-central-1.compute.amazonaws.com//api/photo-prediction-mock
+#### [GET, POST] /api/photo-prediction-mock-<1/2/3>
+Return results with 1x > 80% data.
+http://ec2-35-157-132-97.eu-central-1.compute.amazonaws.com/api/photo-prediction-mock-1
+
+Return results with 2x > 80% data.
+http://ec2-35-157-132-97.eu-central-1.compute.amazonaws.com/api/photo-prediction-mock-2
+
+Return results with 0x > 80% data.
+http://ec2-35-157-132-97.eu-central-1.compute.amazonaws.com/api/photo-prediction-mock-3
