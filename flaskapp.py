@@ -93,7 +93,7 @@ def photoPredictionMock():
 
     list = [
         {'id': 'prunus-serrulata', 'value': 0.99},
-        {'id': 'salix-urbalix', 'value': 0.21},
+        {'id': 'salix-urbalis', 'value': 0.21},
         {'id': 'item-3', 'value': 0.03},
         {'id': 'item-4', 'value': 0.02},
         {'id': 'item-5', 'value': 0.01},
@@ -107,7 +107,7 @@ def photoPredictionMockSimilar():
 
     list = [
         {'id': 'prunus-serrulata', 'value': 0.92},
-        {'id': 'salix-urbalix', 'value': 0.81},
+        {'id': 'salix-urbalis', 'value': 0.81},
         {'id': 'item-3', 'value': 0.03},
         {'id': 'item-4', 'value': 0.02},
         {'id': 'item-5', 'value': 0.01},
@@ -121,7 +121,7 @@ def photoPredictionMockKo():
 
     list = [
         {'id': 'prunus-serrulata', 'value': 0.23},
-        {'id': 'salix-urbalix', 'value': 0.11},
+        {'id': 'salix-urbalis', 'value': 0.11},
         {'id': 'item-3', 'value': 0.03},
         {'id': 'item-4', 'value': 0.02},
         {'id': 'item-5', 'value': 0.01},
