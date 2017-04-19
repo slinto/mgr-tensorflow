@@ -9,11 +9,20 @@ flask run
 ```
 
 ## Deployment
+ON SERVER:
 ```
-git push heroku master
+./update.sh
 ```
 
-## Server install
+or
+
+```
+cd flaskapp/
+git pull origin master
+sudo apachectl restart
+```
+
+## Server installing
 http://www.datasciencebytes.com/bytes/2015/02/24/running-a-flask-app-on-aws-ec2/
 ```
 cd flaskapp/
