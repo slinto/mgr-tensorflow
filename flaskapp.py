@@ -86,7 +86,7 @@ def photoPrediction():
     return jsonify(status='OK', results=list)
 
 
-@app.route('/api/photo-prediction-mock', methods=['GET', 'POST'])
+@app.route('/api/photo-prediction-mock-1', methods=['GET', 'POST'])
 def photoPredictionMock():
     if request.method == 'POST':
         print(request.form['image_data'])
@@ -94,6 +94,34 @@ def photoPredictionMock():
     list = [
         {'id': 'prunus-serrulata', 'value': 0.99},
         {'id': 'salix-urbalix', 'value': 0.21},
+        {'id': 'item-3', 'value': 0.03},
+        {'id': 'item-4', 'value': 0.02},
+        {'id': 'item-5', 'value': 0.01},
+    ]
+    return jsonify(status='OK', results=list)
+
+@app.route('/api/photo-prediction-mock-2', methods=['GET', 'POST'])
+def photoPredictionMockSimilar():
+    if request.method == 'POST':
+        print(request.form['image_data'])
+
+    list = [
+        {'id': 'prunus-serrulata', 'value': 0.92},
+        {'id': 'salix-urbalix', 'value': 0.81},
+        {'id': 'item-3', 'value': 0.03},
+        {'id': 'item-4', 'value': 0.02},
+        {'id': 'item-5', 'value': 0.01},
+    ]
+    return jsonify(status='OK', results=list)
+
+@app.route('/api/photo-prediction-mock-3', methods=['GET', 'POST'])
+def photoPredictionMockKo():
+    if request.method == 'POST':
+        print(request.form['image_data'])
+
+    list = [
+        {'id': 'prunus-serrulata', 'value': 0.23},
+        {'id': 'salix-urbalix', 'value': 0.11},
         {'id': 'item-3', 'value': 0.03},
         {'id': 'item-4', 'value': 0.02},
         {'id': 'item-5', 'value': 0.01},
