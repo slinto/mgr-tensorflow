@@ -59,9 +59,10 @@ def getNormalizedNumber(x):
     return round(float(x), PREDICTION_DECIMAL_LENGTH)
 
 
-def getNormalizedString(s):
-    return s
-
+def getNormalizedString(str):
+    newStr = str.lstrip()
+    newStr = newStr.replace(' ', '-')
+    return newStr
 
 # HTTP API
 app = Flask(__name__)
