@@ -9,6 +9,12 @@ flask run
 ```
 
 ## Deployment
+### 1. Login to server
+```
+ssh -i cert/LeafProjectNew.pem ubuntu@ec2-35-157-132-97.eu-central-1.compute.amazonaws.com
+```
+
+### 2. Update & restart server
 ON SERVER:
 ```
 ./update.sh
@@ -17,7 +23,6 @@ ON SERVER:
 or
 
 ```
-ssh -i cert/LeafProjectNew.pem ubuntu@ec2-35-157-132-97.eu-central-1.compute.amazonaws.com
 cd flaskapp/
 git pull origin master
 sudo apachectl restart
