@@ -17,6 +17,7 @@ ON SERVER:
 or
 
 ```
+ssh -i cert/LeafProjectNew.pem ubuntu@ec2-35-157-132-97.eu-central-1.compute.amazonaws.com
 cd flaskapp/
 git pull origin master
 sudo apachectl restart
